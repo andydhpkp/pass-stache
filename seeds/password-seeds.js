@@ -1,0 +1,1 @@
+const { Password } = require('../models')
