@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create Password model
-class Password extends Model {}
+// create Credential model
+class Credential extends Model {}
 
-Password.init(
+Credential.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -16,9 +16,13 @@ Password.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        associated_login_name: {
+        login_name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -34,8 +38,8 @@ Password.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'user'
+        modelName: 'credential'
     }
 )
 
-module.exports = Password;
+module.exports = Credential;
