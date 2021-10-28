@@ -12,11 +12,11 @@ Password.init(
             primaryKey: true,
             autoIncrement: true
         },
-        associated_login_name: {
+        nickname: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        nickname: {
+        associated_login_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
