@@ -1,56 +1,45 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create User model
-class User extends Model {
-    // add a password check method here
-}
+// create Credential model
+class Credential extends Model {}
 
-// create columns for User model
-User.init(
+Credential.init(
     {
-        
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
-        first_name: {
+        nickname: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        last_name: {
+        login_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        email: {
+        password: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user',
+                key: 'id'
             }
         },
-        master_password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [10]
-            }
-        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'user'
+        modelName: 'credential'
     }
 )
 
-module.exports = User;
+module.exports = Credential;
