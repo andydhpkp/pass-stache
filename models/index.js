@@ -1,14 +1,14 @@
 const User = require('./User')
-const Password = require('./Password')
+const Credential = require('./Credential')
 
-User.hasMany(Password, {
+User.hasMany(Credential, {
     foreignKey: 'user_id'
 })
 
-Password.belongsTo(User, {
+Credential.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'SET NULL'
 })
 
-module.exports = { User, Password };
+module.exports = { User, Credential };
 
