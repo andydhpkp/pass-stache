@@ -2,7 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Credential } = require('../models');
 
-// get all credentials for homepage
+// get all of users credentials for dashboard
 router.get('/:id', (req, res) => {
     console.log('=========================')
     Credential.findAll({
