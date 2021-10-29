@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-//nickname, login_name, password, user_id
+//create new
 router.post('/', (req, res) => {
     User.create({
         first_name: req.body.first_name,
