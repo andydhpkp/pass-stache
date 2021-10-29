@@ -1,16 +1,16 @@
 const router = require('express').Router()
-const { Password, User } = require('../../models')
+const { Credential, User } = require('../../models')
 
 router.get('/', (req, res) => {
-    Password.findAll({
+    Credential.findAll({
         include: [
             {
                 model: User,
-                attributes: ['id', 'username', 'email']
+                attributes: ['id', 'username', 'first_name', 'last_name', 'email', 'master_password']
             }
         ]
     })
-    .then(dbPassword => res.json(dbPassword))
+    .then(dbCredential => res.json(dbCredential))
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
@@ -18,23 +18,23 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    Password.findOne({
+    Credential.findOne({
         where: {
             id: req.params.id
         },
         include: [
             {
                 model: User,
-                attributes: ['id', 'username', 'email']
+                attributes: ['id', 'username', 'first_name', 'last_name', 'email', 'master_password']
             }
         ]
     })
-    .then(dbPassword => {
-        if(!dbPassword) {
-            res.status(404).json({ message: 'No password found with this id' })
+    .then(dbCredential => {
+        if(!dbCredential) {
+            res.status(404).json({ message: 'No credential found with this id' })
             return
         }
-        res.json(dbPassword)
+        res.json(dbCredential)
     })
     .catch(err => {
         console.log(err)
@@ -43,13 +43,14 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    Password.create({
-        associated_login_name: req.body.associated_login_name,
+    Credential.create({
         nickname: req.body.nickname,
+        login_name: req.body.login_name,
+        password: req.body.password,
         //change this to req.session.user_id
         user_id: req.body.user_id
     })
-    .then(dbPassword => res.json(dbPassword))
+    .then(dbCredential => res.json(dbCredential))
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
@@ -57,17 +58,17 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    Password.update(req.body, {
+    Credential.update(req.body, {
         where: {
             id: req.params.id
         }
     })
-    .then(dbPassword => {
-        if (!dbPassword) {
-            res.status(404).json({ message: 'No password found with this id' })
+    .then(dbCredential => {
+        if (!dbCredential) {
+            res.status(404).json({ message: 'No credential found with this id' })
             return
         }
-        res.json(dbPassword)
+        res.json(dbCredential)
     })
     .catch(err => {
         console.log(err)
@@ -76,17 +77,17 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    Password.destroy({
+    Credential.destroy({
         where: {
             id: req.params.id
         }
     })
-    .then(dbPassword => {
-        if (!dbPassword) {
-            res.status(404).json({ message: 'No password found with this id' })
+    .then(dbCredential => {
+        if (!dbCredential) {
+            res.status(404).json({ message: 'No credential found with this id' })
             return
         }
-        res.json(dbPassword)
+        res.json(dbCredential)
     })
     .catch(err => {
         console.log(err)

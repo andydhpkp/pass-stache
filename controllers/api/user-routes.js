@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { User, Password } = require('../../models')
+const { User, Credential } = require('../../models')
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -19,8 +19,8 @@ router.get('/:id', (req, res) => {
         },
         include: [
             {
-                model: Password,
-                attributes: ['id', 'associated_login_name', 'nickname', 'user_id']
+                model: Credential,
+                attributes: ['id', 'nickname', 'login_name', 'password', 'user_id']
             }
         ]
     })
@@ -37,16 +37,18 @@ router.get('/:id', (req, res) => {
     })
 })
 
+//nickname, login_name, password, user_id
 router.post('/', (req, res) => {
     User.create({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        master_password: req.body.master_password
     })
     .then(dbUser => {
         req.session.save(() => {
             req.session.user_id = dbUser.id;
-            req.session.username = dbUser.username;
             req.session.loggedIn = true;
 
             res.json(dbUser)
