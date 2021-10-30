@@ -42,6 +42,11 @@ User.init(
             validate: {
                 len: [10]
             }
+        },
+        //added for 2fa
+        temp_secret: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     },
     {

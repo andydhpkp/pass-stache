@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { User, Credential } = require('../../models')
+const twoFactor = require("node-2fa");
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -37,14 +38,15 @@ router.get('/:id', (req, res) => {
     })
 })
 
-//nickname, login_name, password, user_id
+//create new
 router.post('/', (req, res) => {
     User.create({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         username: req.body.username,
         email: req.body.email,
-        master_password: req.body.master_password
+        master_password: req.body.master_password,
+        temp_secret: twoFactor.generateSecret().secret
     })
     .then(dbUser => {
         req.session.save(() => {
@@ -57,6 +59,43 @@ router.post('/', (req, res) => {
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
+    })
+})
+
+//verify token
+router.post('/verify/:id', (req, res) => {
+    User.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(verifyUser => {
+        console.log('verifyUser.temp_secret = ' + verifyUser.temp_secret)
+        let secret = verifyUser.temp_secret
+        let token = twoFactor.generateToken(secret).token
+        console.log('token = ' + token)
+        let verified = twoFactor.verifyToken(secret, token)
+
+        console.log('verified = ' + verified.delta)
+
+        switch(verified.delta) {
+            case 0:
+                res.json({ message: 'verified' })
+                break;
+            case -1:
+                res.json({ message: 'key entered too late, new key required'})
+                break;
+            case 1:
+                res.json({ message: 'key entered too early, try again'})
+                break;
+            default:
+                res.json({ message: 'something went wrong'})
+        }
+        
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ message: 'Error finding user' })
     })
 })
 
