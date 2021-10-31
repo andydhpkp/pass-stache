@@ -110,8 +110,14 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'No user with that username' })
             return
         }
-        //use User model's password validator
 
+        //use User model's password validator
+        const validPassword = dbUser.checkPassword(req.body.password);
+
+        if (!validPassword) {
+            res.status(400).json({ message: 'Incorrect password!' });
+            return;
+        }
 
         req.session.save(() => {
             req.session.user_id = dbUser.user_id;
