@@ -7,7 +7,7 @@
         </br>  
         
         
-        <div class="btn-group">
+        {{!-- <div class="btn-group">
             <button type="button" class="btn btn-primary">Example Pass!</button>
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
@@ -20,7 +20,26 @@
               <li class="divider"></li>
               <li><a href="#">Delete Password</a></li>
             </ul>
-          </div>
+          </div> --}}
+
+          {{#each credentials}}
+          {{#if credentials.length}}
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary">{{nickname}}</button>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Copy to Clipboard</a></li>
+                <li><a href="#">Reveal Password</a></li>
+                <li><a href="#">Edit Password</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Delete Password</a></li>
+              </ul>
+            </div>
+          {{/if}}
+          {{/each}}
 
         <div class="modal" id="task-form-modal">
             <div class="modal-dialog">
