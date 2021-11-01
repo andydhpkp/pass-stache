@@ -7,7 +7,7 @@
         </br>  
         
         
-        <div class="btn-group">
+        {{!-- <div class="btn-group">
             <button type="button" class="btn btn-primary">Example Pass!</button>
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
@@ -20,7 +20,26 @@
               <li class="divider"></li>
               <li><a href="#">Delete Password</a></li>
             </ul>
-          </div>
+          </div> --}}
+
+          {{#each credentials}}
+          {{#if credentials.length}}
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary">{{nickname}}</button>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Copy to Clipboard</a></li>
+                <li><a href="#">Reveal Password</a></li>
+                <li><a href="#">Edit Password</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Delete Password</a></li>
+              </ul>
+            </div>
+          {{/if}}
+          {{/each}}
 
         <div class="modal" id="task-form-modal">
             <div class="modal-dialog">
@@ -31,28 +50,28 @@
                 </div>
                 <div class="modal-body">
                   <div class="row">
-                    <div class="col-xs-12" id="messageInput">
+                    <form class="col-xs-12" id="messageInput">
                       <label>Password Name</label>
                       <input type="text" id="passname-field" class="form-control" placeholder="Password Name">
-                    </div>
+                    </form>
                   </div>
                   <div class="row">
-                    <div class="col-xs-12" id="city-box">
+                    <form class="col-xs-12" id="city-box">
                       <label>Enter Your Password Here</label>
                       <input type="text" id="pass-field" class="form-control" placeholder="My Password">
-                    </div>
+                    </form>
                   </div>
                   <label id="optionsWords">Include the following options?</label>
                   <div class="row">
                     <div class="col-xs-6">
                         Disregard Above Password and Generate a New Random One?
                     </div>
-                    <div class="col-xs-6">
+                    <form class="col-xs-6">
                         <label class="toggle">
                         <input type="checkbox" id="weather">
                         <span class="handle"></span>
                         </label>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
