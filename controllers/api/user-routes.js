@@ -1,17 +1,27 @@
 const router = require('express').Router()
 const { User, Credential } = require('../../models')
 const twoFactor = require("node-2fa");
+require('dotenv').config();
+
+const accountSid = process.env.accountSid; // Your Account SID from www.twilio.com/console
+const authToken = process.env.authToken; // Your Auth Token from www.twilio.com/console
+const twilio = require('twilio');
+const client = new twilio(accountSid, authToken);
 
 router.get('/', (req, res) => {
     User.findAll({
 
     })
-    .then(dbUser => res.json(dbUser))
+    .then(dbUser => {
+        res.json(dbUser)
+    })
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
     })
 })
+
+
 
 router.get('/:id', (req, res) => {
     User.findOne({
@@ -75,6 +85,14 @@ router.post('/verify/:id', (req, res) => {
         let token = twoFactor.generateToken(secret).token
         console.log('token = ' + token)
         let verified = twoFactor.verifyToken(secret, token)
+
+        client.messages
+        .create({
+            body: token,
+            to: '+18016719135', // Text this number
+            from: '+13187318839', // From a valid Twilio number
+        })
+        .then((message) => console.log(message.sid));
 
         console.log('verified = ' + verified.delta)
 
