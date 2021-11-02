@@ -3,12 +3,12 @@ const { post } = require("../../controllers/api/user-routes");
 
 async function signupFormHandler(event) {
     event.preventDefault();
-                // need to add id to handlebars for these queryselectors 
-    const firstname = document.querySelector('#username-signup').value.trim();
-    const lastname = document.querySelector('#username-signup').value.trim();
-    const username = document.querySelector('#username-signup').value.trim();
-    const email = document.querySelector('#username-signup').value.trim();
-    const masterpass = document.querySelector('#username-signup').value.trim();
+                
+    const firstname = document.querySelector('#firstname-register').value.trim();
+    const lastname = document.querySelector('#lastname-register').value.trim();
+    const username = document.querySelector('#username-register').value.trim();
+    const email = document.querySelector('#email-register').value.trim();
+    const masterpass = document.querySelector('#masterpass-register').value.trim();
 
     if (firstname && lastname && username && email && masterpass) {
         const response = await fetch('/api/users', {
@@ -30,4 +30,4 @@ async function signupFormHandler(event) {
     }
 }
             
-document.querySelector('.btn').addEventListener('submit', signupFormHandler);
+document.querySelector('#register-form').addEventListener('submit', signupFormHandler);
