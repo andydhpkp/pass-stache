@@ -1,0 +1,43 @@
+</br>
+</br>
+<form class="login-form">
+  <div class="col">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" placeholder="Name" id="loginname">
+  </div>
+  </br>
+  </br>
+  <div class="col">
+      <label for="password">Login Password</label>
+      <input type="text" class="form-control" placeholder="Pass" id="loginpassword">
+  </div>
+  </br>
+  </br>
+  <div class="row text-center login_submit">
+      <button type="submit" class="btn">Submit</button>
+  </div>
+</form>
+<a href="/"><img src="./img/ps.jpg" alt="Pass-Stache Logo"></a>
+
+<div class="modal" id="task-form-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Two Factor Authentication</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12" id="messageInput">
+              <label>Your Password has been texted to you, please enter the code you recieve below.</label>
+              <input type="text" id="passname-field" class="form-control" placeholder="Password Name">
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="send-btn" class="btn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
