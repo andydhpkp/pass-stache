@@ -19,7 +19,8 @@ function copyToClipBoard2() {
     } else{
         navigator.clipboard.writeText(text_to_copy).then(
             function(){
-                alert("copied the new way!"); // success 
+                console.log('copied the new way')
+                alert("Password copied to clipboard!"); // success 
             })
         .catch(
             function() {
