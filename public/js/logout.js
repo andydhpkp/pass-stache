@@ -1,4 +1,4 @@
-const { post } = require("../../controllers/api/user-routes");
+// const { post } = require("../../controllers/api/user-routes");
 
 async function logout() {
     const response = await fetch('/api/users/logout', {
@@ -11,6 +11,7 @@ async function logout() {
     } else {
         alert(response.status);
     }
+    console.log("Tried to logout!")
 }
 
 document.querySelector('#logout').addEventListener('click', logout);
