@@ -1,18 +1,19 @@
-const { post } = require("../../controllers/api/user-routes");
-
+// const { post } = require("../../controllers/api/user-routes");
 
 async function loginFormHandler(event) {
     event.preventDefault();
                 // need to add id to handlebars for these queryselectors 
-    const email = document.querySelector('#username-signup').value.trim();
-    const masterpass = document.querySelector('#username-signup').value.trim();
+    const email = document.querySelector('#login-email').value.trim();
+    const master_password = document.querySelector('#login-password').value.trim();
 
-    if (email && masterpass) {
-        const response = await fetch('./api/users/login', {
-            method: post,
+    if (email && master_password) {
+        console.log(email);
+        console.log(master_password);
+        const response = await fetch('/api/users/login', {
+            method: 'post',
             body: JSON.stringify({
                 email,
-                masterpass
+                master_password
             }),
             headers: { 'Content-Type': 'application/json' }
         });
@@ -24,5 +25,5 @@ async function loginFormHandler(event) {
         }
     }
 }
-         
-document.querySelector('.btn').addEventListener('submit', loginFormHandler);
+
+document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
