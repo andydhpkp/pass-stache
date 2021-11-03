@@ -23,4 +23,28 @@ async function newPasswordHandler(event) {
     }
 }
 
+async function updatePasswordHandler(event) {
+    event.preventDefault()
+    const login_name = document.querySelector('#updateLogin')
+    const password = document.querySelector('#copythingy')
+
+    if (login_name && password) {
+        const response = await fetch(`/api/credentials/:id`, {
+            method: 'put',
+            body: JSON.stringify({
+                login_name,
+                password
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        if (response.ok) {
+            document.location.replace('/dashboard')
+        } else {
+            alert(response.statusText)
+        }
+    }
+}
+
 document.querySelector('.add-credential').addEventListener('submit', newPasswordHandler);
+
+document.querySelector('.update-password').addEventListener('submit', updatePasswordHandler);
