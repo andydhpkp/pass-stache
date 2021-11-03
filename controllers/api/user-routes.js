@@ -10,7 +10,7 @@ const client = new twilio(accountSid, authToken);
 
 router.get('/', (req, res) => {
     User.findAll({
-
+        attributes: { exclude: ['master_password'] }
     })
     .then(dbUser => {
         res.json(dbUser)
@@ -21,10 +21,9 @@ router.get('/', (req, res) => {
     })
 })
 
-
-
 router.get('/:id', (req, res) => {
     User.findOne({
+        attributes: { exclude: ['master_password'] },
         where: {
             id: req.params.id
         },
@@ -124,7 +123,7 @@ router.post('/login', (req, res) => {
         }
     }).then(dbUser => {
         if(!dbUser) {
-            // res.status(400).json({ message: 'No user with that username' })
+            res.status(400).json({ message: 'No user with that username' })
             return
         }
 
