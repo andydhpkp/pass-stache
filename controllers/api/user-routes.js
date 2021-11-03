@@ -137,7 +137,7 @@ router.post('/login', (req, res) => {
         }
 
         req.session.save(() => {
-            req.session.user_id = dbUser.user_id;
+            req.session.user_id = dbUser.id;
             req.session.username = dbUser.username;
             req.session.loggedIn = true;
 
