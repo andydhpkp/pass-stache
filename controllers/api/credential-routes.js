@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
         login_name: req.body.login_name,
         password: req.body.password,
         //change this to req.session.user_id
-        user_id: req.body.user_id
+        user_id: req.session.user_id
     })
     .then(dbCredential => res.json(dbCredential))
     .catch(err => {

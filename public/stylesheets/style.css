@@ -19,16 +19,6 @@ body, html {
   float: left;
 }
 
-
-
-
-
-  /* section{
-  z-index: -1;
-  height:100%;
-  width:100%;
-    position:absolute ;  background:radial-gradient(#333,#000);
-  } */
   .leaf{
       position:absolute ;
       width:100%;
@@ -124,5 +114,6 @@ footer{
   z-index: 7;
 }
 
-  
-  
+.add-credential {
+  padding: 3.5%;
+}
