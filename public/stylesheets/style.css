@@ -14,3 +14,7 @@ body, html {
 .navbar-collapse {
   padding-top: 8px;
 }
+
+.add-credential {
+  padding: 3.5%;
+}
