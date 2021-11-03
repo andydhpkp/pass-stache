@@ -3,31 +3,30 @@ const { post } = require("../../controllers/api/user-routes");
 
 async function signupFormHandler(event) {
     event.preventDefault();
-                // need to add id to handlebars for these queryselectors 
-    const firstname = document.querySelector('#username-signup').value.trim();
-    const lastname = document.querySelector('#username-signup').value.trim();
-    const username = document.querySelector('#username-signup').value.trim();
-    const email = document.querySelector('#username-signup').value.trim();
-    const masterpass = document.querySelector('#username-signup').value.trim();
+    const firstName = document.querySelector('#register-first-name').value.trim();
+    const lastName = document.querySelector('#register-last-name').value.trim();
+    const username = document.querySelector('#register-username').value.trim();
+    const email = document.querySelector('#register-email').value.trim();
+    const master_password = document.querySelector('#register-master-password').value.trim();
 
     if (firstname && lastname && username && email && masterpass) {
         const response = await fetch('/api/users', {
             method: 'post',
             body: JSON.stringify({
-                firstname,
-                lastname,
+                firstName,
+                lastName,
                 username,
                 email,
-                masterpass
+                master_password
             }),
             headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
-            console.log('success');
+            document.location.replace('/dashboard');
         } else {
             alert(response.statusText);
         }
     }
 }
             
-document.querySelector('.btn').addEventListener('submit', signupFormHandler);
+document.querySelector('.register-form').addEventListener('submit', signupFormHandler);
