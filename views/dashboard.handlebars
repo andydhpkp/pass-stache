@@ -31,7 +31,9 @@
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Copy to Clipboard</a></li>
+                <textarea id="copythingy" name="hide" style="display:none;">{{credentials.password}}</textarea>
+                {{!-- <button onclick="copyToClipBoard()">Copy</button> --}}
+                <li><a onclick="copyToClipBoard()" id="copythingy">Copy to Clipboard</a></li>
                 <li><a href="#">Reveal Password</a></li>
                 <li><a href="#">Edit Password</a></li>
                 <li class="divider"></li>
@@ -80,3 +82,5 @@
               </div>
             </div>
           </div>
+
+          <script src="/js/index.js"></script>
