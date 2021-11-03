@@ -5,7 +5,9 @@ const { User, Credential } = require('../models');
 
 // render homepage
 router.get('/', (req, res) => {
-    res.render('homepage');
+    res.render('homepage', {
+        loggedIn: req.session.loggedIn
+      });
 })
 
 // render login page
