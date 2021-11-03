@@ -1,21 +1,16 @@
-const { post } = require("../../controllers/api/user-routes");
-
-
 async function signupFormHandler(event) {
     event.preventDefault();
-    const firstName = document.querySelector('#register-first-name').value.trim();
-    const lastName = document.querySelector('#register-last-name').value.trim();
-    const username = document.querySelector('#register-username').value.trim();
+    const first_name = document.querySelector('#register-first-name').value.trim();
+    const last_name = document.querySelector('#register-last-name').value.trim();
     const email = document.querySelector('#register-email').value.trim();
     const master_password = document.querySelector('#register-master-password').value.trim();
 
-    if (firstname && lastname && username && email && masterpass) {
+    if (first_name && last_name && email && master_password) {
         const response = await fetch('/api/users', {
             method: 'post',
             body: JSON.stringify({
-                firstName,
-                lastName,
-                username,
+                first_name,
+                last_name,
                 email,
                 master_password
             }),
@@ -28,5 +23,14 @@ async function signupFormHandler(event) {
         }
     }
 }
-            
+
+function revealPassword() {
+    var x = document.getElementById("register-master-password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
 document.querySelector('.register-form').addEventListener('submit', signupFormHandler);

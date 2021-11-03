@@ -2,7 +2,7 @@
 
 async function loginFormHandler(event) {
     event.preventDefault();
-                // need to add id to handlebars for these queryselectors 
+    // need to add id to handlebars for these queryselectors 
     const email = document.querySelector('#login-email').value.trim();
     const master_password = document.querySelector('#login-password').value.trim();
 
@@ -23,6 +23,15 @@ async function loginFormHandler(event) {
         } else {
             alert(response.statusText);
         }
+    }
+}
+
+function revealPassword() {
+    var x = document.getElementById("login-password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
     }
 }
 
