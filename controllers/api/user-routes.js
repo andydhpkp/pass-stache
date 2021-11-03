@@ -48,11 +48,11 @@ router.get('/:id', (req, res) => {
     })
 })
 
-//create new
+//create new user (register)
 router.post('/', (req, res) => {
     User.create({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
+        first_name: req.body.firstName,
+        last_name: req.body.lastName,
         username: req.body.username,
         email: req.body.email,
         master_password: req.body.master_password,
@@ -117,6 +117,7 @@ router.post('/verify/:id', (req, res) => {
     })
 })
 
+// login route
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
