@@ -1,5 +1,4 @@
         </br>
-        </br>
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#addpassword">Add a new password+</button>
         </div>
@@ -22,26 +21,52 @@
             </ul>
           </div> --}}
 
-          {{#each credentials}}
-          {{#if credentials.length}}
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary">{{nickname}}</button>
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <textarea id="copythingy" name="hide" style="display:none;" hidden="hidden">{{credentials.password}}</textarea>
-                {{!-- <button onclick="copyToClipBoard()">Copy</button> --}}
-                <li><a onclick="copyToClipBoard()" id="copythingy">Copy to Clipboard</a></li>
-                <li><a href="#">Reveal Password</a></li>
-                <li><a href="#">Edit Password</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Delete Password</a></li>
-              </ul>
+      {{#each credentials}}
+            <div class="row">
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#showpassword{{nickname}}">{{nickname}}</button>
+              </div>
             </div>
-          {{/if}}
-          {{/each}}
+
+          <div class="modal" id="showpassword{{nickname}}">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title">{{nickname}}</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <form class="col-xs-12" id="messageInput">
+                      <label>Login Name</label>
+                      <textarea class="form-control" rows="1">{{login_name}}</textarea>
+                    </form>
+                  </div>
+                  <div class="row">
+                    <form class="col-xs-12" id="city-box">
+                      <label>Password</label>
+                      <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
+                    </form>
+                  </div>
+                  </br>
+                  <div class="row">
+                    <div class="btn-group">
+                      <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
+                    </div>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" id="send-btn" class="btn">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </br>
+
+      {{/each}}
+
+      <a href="/"><img src="./img/ps.jpg" alt="Pass-Stache Logo"></a>
 
         <div class="modal" id="addpassword">
             <div class="modal-dialog">
@@ -83,4 +108,4 @@
             </div>
           </div>
 
-          <script src="/js/index.js"></script>
+          
