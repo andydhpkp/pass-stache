@@ -120,8 +120,7 @@ router.post('/verify/:id', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
-            email: req.body.email,
-            password: req.body.password
+            email: req.body.email
         }
     }).then(dbUser => {
         if(!dbUser) {
@@ -130,7 +129,7 @@ router.post('/login', (req, res) => {
         }
 
         //use User model's password validator
-        const validPassword = dbUser.checkPassword(req.body.password);
+        const validPassword = dbUser.checkPassword(req.body.master_password);
 
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password!' });
@@ -140,7 +139,7 @@ router.post('/login', (req, res) => {
         req.session.save(() => {
             req.session.user_id = dbUser.user_id;
             req.session.username = dbUser.username;
-            res.session.loggedIn = true
+            req.session.loggedIn = true;
 
             res.json({ user: dbUser, message: 'You are now logged in!' })
         })
