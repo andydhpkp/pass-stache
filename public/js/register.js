@@ -4,21 +4,24 @@ const { post } = require("../../controllers/api/user-routes");
 async function signupFormHandler(event) {
     event.preventDefault();
                 // need to add id to handlebars for these queryselectors 
-    const firstname = document.querySelector('#username-signup').value.trim();
-    const lastname = document.querySelector('#username-signup').value.trim();
-    const username = document.querySelector('#username-signup').value.trim();
-    const email = document.querySelector('#username-signup').value.trim();
-    const masterpass = document.querySelector('#username-signup').value.trim();
+    const first_name = document.querySelector('#registername').value.trim();
+    const last_name = document.querySelector('#registerlastname').value.trim();
+    const username = document.querySelector('#registerusername').value.trim();
+    const email = document.querySelector('#registeremail').value.trim();
+    const master_password = document.querySelector('#registerloginpass').value.trim();
 
-    if (firstname && lastname && username && email && masterpass) {
+    console.log(first_name + last_name + username + email + master_password)
+
+    if (first_name && last_name && username && email && master_password) {
+        console.log('this worked')
         const response = await fetch('/api/users', {
             method: 'post',
             body: JSON.stringify({
-                firstname,
-                lastname,
+                first_name,
+                last_name,
                 username,
                 email,
-                masterpass
+                master_password
             }),
             headers: { 'Content-Type': 'application/json' }
         });
@@ -27,6 +30,9 @@ async function signupFormHandler(event) {
         } else {
             alert(response.statusText);
         }
+    }
+    else {
+        console.log('did not work')
     }
 }
             
