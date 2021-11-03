@@ -1,7 +1,7 @@
         </br>
         </br>
         <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#task-form-modal">Add a new password+</button>
+            <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#addpassword">Add a new password+</button>
         </div>
         </br>
         </br>  
@@ -31,7 +31,9 @@
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Copy to Clipboard</a></li>
+                <textarea id="copythingy" name="hide" style="display:none;" hidden="hidden">{{credentials.password}}</textarea>
+                {{!-- <button onclick="copyToClipBoard()">Copy</button> --}}
+                <li><a onclick="copyToClipBoard()" id="copythingy">Copy to Clipboard</a></li>
                 <li><a href="#">Reveal Password</a></li>
                 <li><a href="#">Edit Password</a></li>
                 <li class="divider"></li>
@@ -41,7 +43,7 @@
           {{/if}}
           {{/each}}
 
-        <div class="modal" id="task-form-modal">
+        <div class="modal" id="addpassword">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -80,3 +82,5 @@
               </div>
             </div>
           </div>
+
+          <script src="/js/index.js"></script>

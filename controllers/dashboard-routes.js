@@ -3,21 +3,21 @@ const sequelize = require('../config/connection');
 const { User, Credential } = require('../models');
 
 // get all of users credentials for dashboard
-router.get('/:id', (req, res) => {
+router.get('/', (req, res) => {
     console.log('=========================')
     Credential.findAll({
         where: {
             // change this to req.session.user_id when login is functioning
-            user_id: req.params.id
+            user_id: req.session.user_id
         }
     })
         .then(dbCredentialData => {
             const credentials = dbCredentialData.map(cred => cred.get({plain: true}));
 
-            res.render('homepage', {
-                credentials
+            res.render('dashboard', {
+                credentials,
                 // include this:
-                // loggedIn: req.session.loggedIn
+                loggedIn: req.session.loggedIn
             })
         })
         .catch(err => {

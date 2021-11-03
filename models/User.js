@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 class User extends Model {
     // set up method to run on instance data (per user) to check password
     checkPassword(loginPw) {
-        return bcrypt.compareSync(loginPw, this.password);
+        return bcrypt.compareSync(loginPw, this.master_password);
     }
 }
 
@@ -48,12 +48,19 @@ User.init(
             }
         },
         //added for 2fa
-        temp_secret: {
-            type: DataTypes.STRING,
-            allowNull: true
-        }
+        // temp_secret: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // }
     },
     {
+        hooks: {
+            // set up beforeCreate lifecycle "hook" functionality
+            async beforeCreate(newUserData) {
+                newUserData.master_password = await bcrypt.hash(newUserData.master_password, 10);
+                return newUserData;
+            }
+        },
         sequelize,
         timestamps: false,
         freezeTableName: true,

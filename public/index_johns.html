@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pass-Stache  *෴* </title>
-  <!-- <link rel="stylesheet" href="/stylesheets/style.css"> -->
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://bootflat.github.io/bootflat/css/bootflat.css">
 </head>
@@ -15,40 +15,83 @@
     <header>
     </header>
     <main class="text-center">
-
     </br>
   </br>
-      <div class="col">
-          <label>Name</label>
-          <input type="text" class="form-control" placeholder="Name">
-      </div>
+  <div class="btn-group">
+      <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#addpassword">Add a new password+</button>
+  </div>
   </br>
-  </br>
-      <div class="col">
-          <label>Login Password</label>
-          <input type="text" class="form-control" placeholder="Pass">
-      </div>
-  </br>
-  </br>
-  <form class="row text-center login_submit">
-      <button type="submit" class="btn" href="#info">Submit</button>
-  </form>
-  <a href="/"><img src="./img/ps.jpg" alt="Pass-Stache Logo"></a>
+  </br>  
   
-  <div class="modal" id="task-form-modal">
+  
+  <!-- {{!-- <div class="btn-group">
+      <button type="button" class="btn btn-primary">Example Pass!</button>
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Copy to Clipboard</a></li>
+        <li><a href="#">Reveal Password</a></li>
+        <li><a href="#">Edit Password</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Delete Password</a></li>
+      </ul>
+    </div> --}} -->
+
+    {{#each credentials}}
+    {{#if credentials.length}}
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary">{{nickname}}</button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <textarea id="copythingy" name="hide" style="display:none;" hidden="hidden">{{credentials.password}}</textarea>
+          <!-- <button onclick="copyToClipBoard()">Copy</button> -->
+          <li><a onclick="copyToClipBoard()" id="copythingy">Copy to Clipboard</a></li>
+          <li><a href="#">Reveal Password</a></li>
+          <li><a href="#">Edit Password</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Delete Password</a></li>
+        </ul>
+      </div>
+    {{/if}}
+    {{/each}}
+
+  <div class="modal" id="addpassword">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">Two Factor Authentication</h4>
+            <h4 class="modal-title">Create A Password</h4>
           </div>
           <div class="modal-body">
             <div class="row">
-              <div class="col-xs-12" id="messageInput">
-                <label>Your Password has been texted to you, please enter the code you recieve below.</label>
+              <form class="col-xs-12" id="messageInput">
+                <label>Password Name</label>
                 <input type="text" id="passname-field" class="form-control" placeholder="Password Name">
-              </div>
+              </form>
             </div>
+            <div class="row">
+              <form class="col-xs-12" id="city-box">
+                <label>Enter Your Password Here</label>
+                <input type="text" id="pass-field" class="form-control" placeholder="My Password">
+              </form>
+            </div>
+            <label id="optionsWords">Include the following options?</label>
+            <div class="row">
+              <div class="col-xs-6">
+                  Disregard Above Password and Generate a New Random One?
+              </div>
+              <form class="col-xs-6">
+                  <label class="toggle">
+                  <input type="checkbox" id="weather">
+                  <span class="handle"></span>
+                  </label>
+              </form>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" id="send-btn" class="btn">Send</button>
@@ -56,12 +99,8 @@
         </div>
       </div>
     </div>
-  </div>
 
-
-
-
-
+    <script src="/js/index.js"></script>
     </main>
     <footer>
       <div class="row">
@@ -75,7 +114,25 @@
                   <dd class="nav-item"><a href="#">How it works</a></dd>
                 </dl>
                 <dl class="footer-nav">
+                  <dt class="nav-title">Portfolios</dt>
+                  <dd class="nav-item"><a href="#">Portfolios</a></dd>
+                  <dd class="nav-item"><a href="#">GitHub</a></dd>
+                  <dd class="nav-item"><a href="#">Email</a></dd>
+                </dl>
+                <dl class="footer-nav">
+                  <dt class="nav-title">Email</dt>
+                  <dd class="nav-item"><a href="#">Portfolios</a></dd>
+                  <dd class="nav-item"><a href="#">GitHub</a></dd>
+                  <dd class="nav-item"><a href="#">Email</a></dd>
+                </dl>
+                <dl class="footer-nav">
                   <dt class="nav-title">CONTACT</dt>
+                  <dd class="nav-item"><a href="#">Portfolios</a></dd>
+                  <dd class="nav-item"><a href="#">GitHub</a></dd>
+                  <dd class="nav-item"><a href="#">Email</a></dd>
+                </dl>
+                <dl class="footer-nav">
+                  <dt class="nav-title">Something Else</dt>
                   <dd class="nav-item"><a href="#">Portfolios</a></dd>
                   <dd class="nav-item"><a href="#">GitHub</a></dd>
                   <dd class="nav-item"><a href="#">Email</a></dd>
@@ -88,11 +145,11 @@
       </div>
     </footer>
   </div>
-  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
-  <script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
-  <script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
+    <script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
+    <script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script>
 </body>
 
 </html>
