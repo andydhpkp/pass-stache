@@ -13,6 +13,41 @@
 <body>
   <div class="wrapper">
     <header>
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Pass-Stache *෴* </a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+
+
+              {{#if loggedIn}}
+                <div class="btn-group">
+                  <a id="logout" class="btn btn-primary btn-block" href="#" role="button">Logout</a>
+                  {{!-- <button id="logout" class="btn-no-style">logout</button> --}}
+                </div>
+                <div class="btn-group">
+                  <a class="btn btn-primary btn-block" href="/dashboard" role="button">Dashboard</a>
+                </div>
+              {{else}}
+                <div class="btn-group">
+                  <a class="btn btn-primary btn-block" href="/login" role="button">Login</a>
+                </div>
+              {{/if}}
+                {{!-- <button type="button" class="btn btn-primary navbar-btn" href="/login">Login</button> --}}
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
     </header>
     <main class="text-center">
       {{{ body }}}
@@ -73,6 +108,8 @@
     <script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
     <script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
     <script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="/js/logout.js"></script>
 </body>
 
 </html>
