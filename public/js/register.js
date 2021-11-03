@@ -23,5 +23,14 @@ async function signupFormHandler(event) {
         }
     }
 }
-            
+
+function revealPassword() {
+    var x = document.getElementById("register-master-password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
 document.querySelector('.register-form').addEventListener('submit', signupFormHandler);
