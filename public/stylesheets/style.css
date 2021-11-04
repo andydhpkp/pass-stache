@@ -148,10 +148,13 @@ footer {
   display: none;
 }
 
+.modal-body input {
+  width: 80%;
+  margin: 0 auto;
+}
 
- @media screen and (max-width: 450px) {
-  .modal{
-    width: 337px;
+@media screen and (max-width: 450px) {
+  .modal {
+    max-width: 375px;
   }
-
 }
