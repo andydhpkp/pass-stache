@@ -26,14 +26,15 @@
         </div>
         <div class="modal-body">
 
-          <form class="passwordUpdate">
+          {{!-- <form class="passwordUpdate"> --}}
             <div class="row">
                 <label>Login Name</label>
-                <textarea class="form-control" rows="1" id="login_name">{{login_name}}</textarea>
+                <input class="form-control" rows="1" id="login_name" value={{login_name}} />
             </div>
             <div class="row">
                 <label>Password</label>
-                <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
+                <input type="password" class="form-control" rows="1" id="copythingy" value={{password}}/>
+                <input type="checkbox" onclick="revealPassword()"> Show Password
             </div>
             </br>
             <div class="row">
@@ -43,12 +44,11 @@
               <h5 class="clipboard-confirmation hide">Copied &#10003</h5>
             </div>
             <div class="modal-footer">
-              <input type="hidden" id="deletethingy" name="deletethingy" value={{id}}>
               <button onclick="deletePassHandler()" class="btn btn-danger" id="deleteBtn" data-dismiss="modal">Delete Password</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" id="send-btn" class="btn">Send</button>
+              <button type="submit" id="send-btn" class="btn">Save</button>
             </div>
-          </form>
+          {{!-- </form> --}}
 
       </div>
     </div>
@@ -64,7 +64,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Add A New Password</h4>
+        <h4 class="modal-title">Add Password</h4>
       </div>
       <div class="modal-body">
         <form class="add-credential">
@@ -80,7 +80,8 @@
           <br>
           <div class="row">
             <label>Password</label>
-            <input type="text" id="pass-field" class="form-control" placeholder="My Password">
+            <input type="password" id="pass-field" class="form-control" placeholder="My Password">
+            <input type="checkbox" onclick="revealNewPassword()"> Show Password
           </div>
           <br>
             <div class="row">
@@ -96,7 +97,7 @@
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" id="send-btn" class="btn">Send</button>
+          <button type="submit" id="send-btn" class="btn">Add</button>
         </div>
       </form>
     </div>

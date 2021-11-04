@@ -49,4 +49,4 @@ async function updatePassword(event) {
 
 document.querySelector('.add-credential').addEventListener('submit', newPasswordHandler);
 
-document.querySelector('.passwordUpdate').addEventListener('submit', updatePassword);
+// document.querySelector('.passwordUpdate').addEventListener('submit', updatePassword);

@@ -38,3 +38,22 @@ function copyToClipBoard2() {
                 });
     }
 }
+
+function revealPassword() {
+    document.querySelectorAll("#copythingy").forEach(field => {
+        if (field.type === "password") {
+            field.type = "text";
+        } else {
+            field.type = "password";
+        }
+    });
+}
+
+function revealNewPassword() {
+    var x = document.getElementById("pass-field");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
