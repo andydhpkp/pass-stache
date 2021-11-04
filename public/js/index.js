@@ -37,5 +37,4 @@ function copyToClipBoard2() {
                     alert("err"); // error
                 });
     }
-
 }
