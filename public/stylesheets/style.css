@@ -18,3 +18,13 @@ body, html {
 .add-credential {
   padding: 3.5%;
 }
+
+.clipboard-confirmation {
+  margin-top: 10px;
+  color: lightslategray;
+  font-size: 1.5rem;
+}
+
+.hide {
+  display: none;
+}
