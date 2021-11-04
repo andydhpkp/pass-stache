@@ -1,111 +1,106 @@
-        </br>
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#addpassword">Add a new password+</button>
+</br>
+<div class="btn-group">
+  <button type="button" class="btn btn-warning btn-block" href="#" data-toggle="modal" data-target="#addpassword">+ Add Password</button>
+</div>
+</br>
+</br>
+{{#if credentials.length}}
+<h4>Saved Passwords:</h4>
+{{else}}
+<h4>No Saved Passwords Yet!</h4>
+{{/if}}
+
+{{#each credentials}}
+  <div class="row">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#showpassword{{id}}">{{nickname}}</button>
+    </div>
+  </div>         
+
+  <div class="modal" id="showpassword{{id}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">{{nickname}}</h4>
         </div>
-        </br>
-        </br>  
-        
-        
-        {{!-- <div class="btn-group">
-            <button type="button" class="btn btn-primary">Example Pass!</button>
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Copy to Clipboard</a></li>
-              <li><a href="#">Reveal Password</a></li>
-              <li><a href="#">Edit Password</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Delete Password</a></li>
-            </ul>
-          </div> --}}
-
-      {{#each credentials}}
-            <div class="row">
-              <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#showpassword{{nickname}}">{{nickname}}</button>
-              </div>
-            </div>
-
-          <div class="modal" id="showpassword{{nickname}}">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title">{{nickname}}</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <form class="col-xs-12" id="messageInput">
-                      <label>Login Name</label>
-                      <textarea class="form-control" rows="1">{{login_name}}</textarea>
-                    </form>
-                  </div>
-                  <div class="row">
-                    <form class="col-xs-12" id="city-box">
-                      <label>Password</label>
-                      <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
-                    </form>
-                  </div>
-                  </br>
-                  <div class="row">
-                    <div class="btn-group">
-                      <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
-                    </div>
-                  </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" id="send-btn" class="btn">Send</button>
-                </div>
-              </div>
-            </div>
+        <div class="modal-body">
+          <div class="row">
+            <form class="col-xs-12" id="messageInput">
+              <label>Login Name</label>
+              <textarea class="form-control" rows="1">{{login_name}}</textarea>
+            </form>
           </div>
+          <div class="row">
+            <form class="col-xs-12" id="city-box">
+              <label>Password</label>
+              <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
+            </form>
           </div>
           </br>
-
-      {{/each}}
-
-      <a href="/"><img src="./img/ps.jpg" alt="Pass-Stache Logo"></a>
-
-        <div class="modal" id="addpassword">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title">Create A Password</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <form class="col-xs-12" id="messageInput">
-                      <label>Password Name</label>
-                      <input type="text" id="passname-field" class="form-control" placeholder="Password Name">
-                    </form>
-                  </div>
-                  <div class="row">
-                    <form class="col-xs-12" id="city-box">
-                      <label>Enter Your Password Here</label>
-                      <input type="text" id="pass-field" class="form-control" placeholder="My Password">
-                    </form>
-                  </div>
-                  <label id="optionsWords">Include the following options?</label>
-                  <div class="row">
-                    <div class="col-xs-6">
-                        Disregard Above Password and Generate a New Random One?
-                    </div>
-                    <form class="col-xs-6">
-                        <label class="toggle">
-                        <input type="checkbox" id="weather">
-                        <span class="handle"></span>
-                        </label>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" id="send-btn" class="btn">Send</button>
-                </div>
-              </div>
+          <div class="row">
+            <div class="btn-group">
+              <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
             </div>
+            <h5 class="clipboard-confirmation hide">Copied &#10003</h5>
           </div>
+        <div class="modal-footer">
+          <input type="hidden" id="deletethingy" name="deletethingy" value={{id}}>
+          <button onclick="deletePassHandler()" class="btn btn-danger" id="deleteBtn" data-dismiss="modal">Delete Password</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="send-btn" class="btn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</br>
+{{/each}}
 
-          
+<a href="/" id="pslogo"><img src="./img/pslogomain.gif" alt="Pass-Stache Logo"></a>
+
+<div class="modal" id="addpassword">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add A New Password</h4>
+      </div>
+      <div class="modal-body">
+        <form class="add-credential">
+          <div class="row">
+            <label>Password Nickname</label>
+            <input type="text" id="passname-field" class="form-control" placeholder="What service does this password unlock?">
+          </div>
+          <br>
+          <div class="row">
+            <label>Username</label>
+            <input type="text" id="username-field" class="form-control" placeholder="Username">
+          </div>
+          <br>
+          <div class="row">
+            <label>Password</label>
+            <input type="text" id="pass-field" class="form-control" placeholder="My Password">
+          </div>
+          <br>
+            <div class="row">
+              <div class="col-xs-6">
+                  Generate a random secure password instead
+              </div>
+              <div class="col-xs-6">
+                  <label class="toggle">
+                  <input type="checkbox" id="weather">
+                  <span class="handle"></span>
+                  </label>
+              </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" id="send-btn" class="btn">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/js/add-pass.js"></script>

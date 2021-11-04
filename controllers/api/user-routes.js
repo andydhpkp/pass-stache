@@ -3,10 +3,10 @@ const { User, Credential } = require('../../models')
 const twoFactor = require("node-2fa");
 require('dotenv').config();
 
-const accountSid = process.env.accountSid; // Your Account SID from www.twilio.com/console
-const authToken = process.env.authToken; // Your Auth Token from www.twilio.com/console
-const twilio = require('twilio');
-const client = new twilio(accountSid, authToken);
+// const accountSid = process.env.accountSid; // Your Account SID from www.twilio.com/console
+// const authToken = process.env.authToken; // Your Auth Token from www.twilio.com/console
+// const twilio = require('twilio');
+// const client = new twilio(accountSid, authToken);
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -71,49 +71,49 @@ router.post('/', (req, res) => {
 })
 
 //verify token
-router.post('/verify/:id', (req, res) => {
-    User.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(verifyUser => {
-        console.log('verifyUser.temp_secret = ' + verifyUser.temp_secret)
-        let secret = verifyUser.temp_secret
-        let token = twoFactor.generateToken(secret).token
-        console.log('token = ' + token)
-        let verified = twoFactor.verifyToken(secret, token)
+// router.post('/verify/:id', (req, res) => {
+//     User.findOne({
+//         where: {
+//             id: req.params.id
+//         }
+//     })
+//     .then(verifyUser => {
+//         console.log('verifyUser.temp_secret = ' + verifyUser.temp_secret)
+//         let secret = verifyUser.temp_secret
+//         let token = twoFactor.generateToken(secret).token
+//         console.log('token = ' + token)
+//         let verified = twoFactor.verifyToken(secret, token)
 
-        client.messages
-        .create({
-            body: token,
-            to: '+18016719135', // Text this number
-            from: '+13187318839', // From a valid Twilio number
-        })
-        .then((message) => console.log(message.sid));
+//         client.messages
+//         .create({
+//             body: token,
+//             to: '+18016719135', // Text this number
+//             from: '+13187318839', // From a valid Twilio number
+//         })
+//         .then((message) => console.log(message.sid));
 
-        console.log('verified = ' + verified.delta)
+//         console.log('verified = ' + verified.delta)
 
-        switch(verified.delta) {
-            case 0:
-                res.json({ message: 'verified' })
-                break;
-            case -1:
-                res.json({ message: 'key entered too late, new key required'})
-                break;
-            case 1:
-                res.json({ message: 'key entered too early, try again'})
-                break;
-            default:
-                res.json({ message: 'something went wrong'})
-        }
+//         switch(verified.delta) {
+//             case 0:
+//                 res.json({ message: 'verified' })
+//                 break;
+//             case -1:
+//                 res.json({ message: 'key entered too late, new key required'})
+//                 break;
+//             case 1:
+//                 res.json({ message: 'key entered too early, try again'})
+//                 break;
+//             default:
+//                 res.json({ message: 'something went wrong'})
+//         }
         
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({ message: 'Error finding user' })
-    })
-})
+//     })
+//     .catch(err => {
+//         console.log(err)
+//         res.status(500).json({ message: 'Error finding user' })
+//     })
+// })
 
 // login route
 router.post('/login', (req, res) => {
