@@ -1,79 +1,57 @@
-</br>
-<div class="btn-group">
-    <button type="button" class="btn btn-danger btn-block" href="#" data-toggle="modal" data-target="#addpassword">+ Add a new password</button>
-</div>
-</br>
-</br>  
-
-
-{{!-- <div class="btn-group">
-    <button type="button" class="btn btn-primary">Example Pass!</button>
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span>
-      <span class="sr-only">Toggle Dropdown</span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#">Copy to Clipboard</a></li>
-      <li><a href="#">Reveal Password</a></li>
-      <li><a href="#">Edit Password</a></li>
-      <li class="divider"></li>
-      <li><a href="#">Delete Password</a></li>
-    </ul>
-  </div> --}}
-
-{{#if credentials.length}}
-<h1>Saved Passwords:</h1>
-{{else}}
-<h1>Nothing here yet!</h1>
-{{/if}}
-
-{{#each credentials}}
-    <div class="row">
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#showpassword{{nickname}}">{{nickname}}</button>
-      </div>
-    </div>
-
-  <div class="modal" id="showpassword{{nickname}}">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title">{{nickname}}</h4>
+        </br>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#addpassword">Add a new password+</button>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <form class="col-xs-12" id="messageInput">
-              <label>Login Name</label>
-              <textarea class="form-control" rows="1">{{login_name}}</textarea>
-            </form>
-          </div>
-          <div class="row">
-            <form class="col-xs-12" id="city-box">
-              <label>Password</label>
-              <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
-            </form>
-          </div>
-          </br>
-          <div class="row">
-            <div class="btn-group">
-              <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
+        </br>
+        </br>  
+        
+          {{#each credentials}}
+            <div class="row">
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#showpassword{{id}}">{{nickname}}</button>
+              </div>
+            </div>         
+
+            <div class="modal" id="showpassword{{id}}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{nickname}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <form class="col-xs-12" id="messageInput">
+                        <label>Login Name</label>
+                        <textarea class="form-control" rows="1">{{login_name}}</textarea>
+                      </form>
+                    </div>
+                    <div class="row">
+                      <form class="col-xs-12" id="city-box">
+                        <label>Password</label>
+                        <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
+                      </form>
+                    </div>
+                    </br>
+                    <div class="row">
+                      <div class="btn-group">
+                        <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
+                      </div>
+                    </div>
+                  <div class="modal-footer">
+                    <input type="hidden" id="deletethingy" name="deletethingy" value={{id}}>
+                    <button onclick="deletePassHandler()" class="btn btn-danger" id="deleteBtn" data-dismiss="modal">Delete Password</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="send-btn" class="btn">Send</button>
+                  </div>
+                </div>
+              </div>
             </div>
-              <h5 class="clipboard-confirmation hide">Copied &#10003</h5>
-          </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" id="send-btn" class="btn">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  </br>
+            </div>
+          </br>
+          {{/each}}
 
-{{/each}}
-
-<a href="/"><img src="./img/ps.jpg" alt="Pass-Stache Logo"></a>
+      <a href="/" id="pslogo"><img src="./img/pslogomain.gif" alt="Pass-Stache Logo"></a>
 
 <div class="modal" id="addpassword">
     <div class="modal-dialog">
