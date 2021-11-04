@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 // render login page
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/');
+        res.redirect('/dashboard');
     }
 
     res.render('login');
@@ -22,7 +22,7 @@ router.get('/login', (req, res) => {
 // render login page
 router.get('/register', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/');
+        res.redirect('/dashboard');
     }
 
     res.render('register');

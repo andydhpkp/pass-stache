@@ -12,11 +12,11 @@ async function deletePassHandler(event) {
     });
     console.log(`fetch = /api/credentials/${id}`)
   
-    if (response.ok) {
-      document.location.replace('/dashboard');
-    } else {
-      alert(response.statusText);
-    }
+    // if (response.ok) {
+    //   document.location.replace('/dashboard');
+    // } else {
+    //   alert(response.statusText);
+    // }
   }
   
 //   document.querySelector('.delete-pass-btn').addEventListener('click', deleteFormHandler);
