@@ -1,9 +1,14 @@
         </br>
         <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#addpassword">Add a new password+</button>
+            <button type="button" class="btn btn-warning btn-block" href="#" data-toggle="modal" data-target="#addpassword">Add a new password+</button>
         </div>
         </br>
-        </br>  
+        </br>
+        {{#if credentials.length}}
+        <h4>Saved Passwords:</h4>
+        {{else}}
+        <h4>No Saved Passwords Yet!</h4>
+        {{/if}}
         
           {{#each credentials}}
             <div class="row">
@@ -37,6 +42,7 @@
                       <div class="btn-group">
                         <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
                       </div>
+                      <h5 class="clipboard-confirmation hide">Copied &#10003</h5>
                     </div>
                   <div class="modal-footer">
                     <input type="hidden" id="deletethingy" name="deletethingy" value={{id}}>
