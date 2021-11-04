@@ -25,31 +25,31 @@
           <h4 class="modal-title">{{nickname}}</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <form class="col-xs-12" id="messageInput">
-              <label>Login Name</label>
-              <textarea class="form-control" rows="1">{{login_name}}</textarea>
-            </form>
-          </div>
-          <div class="row">
-            <form class="col-xs-12" id="city-box">
-              <label>Password</label>
-              <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
-            </form>
-          </div>
-          </br>
-          <div class="row">
-            <div class="btn-group">
-              <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
+
+          <form class="passwordUpdate">
+            <div class="row">
+                <label>Login Name</label>
+                <textarea class="form-control" rows="1" id="login_name">{{login_name}}</textarea>
             </div>
-            <h5 class="clipboard-confirmation hide">Copied &#10003</h5>
-          </div>
-        <div class="modal-footer">
-          <input type="hidden" id="deletethingy" name="deletethingy" value={{id}}>
-          <button onclick="deletePassHandler()" class="btn btn-danger" id="deleteBtn" data-dismiss="modal">Delete Password</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" id="send-btn" class="btn">Send</button>
-        </div>
+            <div class="row">
+                <label>Password</label>
+                <textarea class="form-control" rows="1" id="copythingy">{{password}}</textarea>
+            </div>
+            </br>
+            <div class="row">
+              <div class="btn-group">
+                <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
+              </div>
+              <h5 class="clipboard-confirmation hide">Copied &#10003</h5>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" id="deletethingy" name="deletethingy" value={{id}}>
+              <button onclick="deletePassHandler()" class="btn btn-danger" id="deleteBtn" data-dismiss="modal">Delete Password</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" id="send-btn" class="btn">Send</button>
+            </div>
+          </form>
+
       </div>
     </div>
   </div>
