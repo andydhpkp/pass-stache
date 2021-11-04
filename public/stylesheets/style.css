@@ -142,3 +142,11 @@ footer {
 .hide {
   display: none;
 }
+
+
+ @media screen and (max-width: 450px) {
+  .modal{
+    width: 337px;
+  }
+
+}
