@@ -118,6 +118,10 @@ footer{
   padding: 3.5%;
 }
 
+.passwordUpdate {
+  padding: 3.5%;
+}
+
 .clipboard-confirmation {
   margin-top: 10px;
   color: lightslategray;

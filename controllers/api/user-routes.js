@@ -3,10 +3,10 @@ const { User, Credential } = require('../../models')
 const twoFactor = require("node-2fa");
 require('dotenv').config();
 
-const accountSid = process.env.accountSid; // Your Account SID from www.twilio.com/console
+/* const accountSid = process.env.accountSid; // Your Account SID from www.twilio.com/console
 const authToken = process.env.authToken; // Your Auth Token from www.twilio.com/console
 const twilio = require('twilio');
-const client = new twilio(accountSid, authToken);
+const client = new twilio(accountSid, authToken); */
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -70,7 +70,7 @@ router.post('/', (req, res) => {
     })
 })
 
-//verify token
+/* //verify token
 router.post('/verify/:id', (req, res) => {
     User.findOne({
         where: {
@@ -113,7 +113,7 @@ router.post('/verify/:id', (req, res) => {
         console.log(err)
         res.status(500).json({ message: 'Error finding user' })
     })
-})
+}) */
 
 // login route
 router.post('/login', (req, res) => {
