@@ -158,7 +158,7 @@ footer {
     max-width: 375px;
   }
 
-  #modalClose{
+  .modal-close{
     display: none;
   }
 }
