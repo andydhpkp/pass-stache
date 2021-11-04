@@ -11,21 +11,31 @@ function copyToClipboard() {
 function copyToClipBoard2() {
     var text_to_copy = document.getElementById("copythingy").innerHTML;
 
-    if (!navigator.clipboard){
+    if (!navigator.clipboard) {
         text_to_copy.select();
         document.execCommand('copy');
-    
+
         console.log('copied the old way')
-    } else{
+    } else {
         navigator.clipboard.writeText(text_to_copy).then(
-            function(){
+            function () {
+
                 console.log('copied the new way')
-                alert("Password copied to clipboard!"); // success 
+
+                // display success text for two seconds
+                const successTextElements = document.getElementsByClassName('clipboard-confirmation');
+                console.log(successTextElements)
+                for (let i = 0; i < successTextElements.length; i++) {
+                    successTextElements[i].setAttribute("class", "clipboard-confirmation");
+                    setTimeout(function () {
+                        successTextElements[i].setAttribute("class", "clipboard-confirmation hide");
+                    }, 2000);
+                }
             })
-        .catch(
-            function() {
-                alert("err"); // error
-        });
-    }  
+            .catch(
+                function () {
+                    alert("err"); // error
+                });
+    }
 
 }

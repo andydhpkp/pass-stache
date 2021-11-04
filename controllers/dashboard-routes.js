@@ -9,7 +9,8 @@ router.get('/', (req, res) => {
         where: {
             // change this to req.session.user_id when login is functioning
             user_id: req.session.user_id
-        }
+        },
+        order: [['nickname', 'ASC']]
     })
         .then(dbCredentialData => {
             const credentials = dbCredentialData.map(cred => cred.get({plain: true}));
