@@ -29,24 +29,24 @@
           {{!-- <form class="passwordUpdate"> --}}
             <div class="row">
                 <label>Login Name</label>
-                <input class="form-control" rows="1" id="login_name" value={{login_name}} />
+                <input class="form-control" rows="1" id="login-name-{{id}}" value={{login_name}} />
             </div>
             <div class="row">
                 <label>Password</label>
-                <input type="password" class="form-control" rows="1" id="copythingy" value={{password}}/>
-                <input type="checkbox" onclick="revealPassword()"> Show Password
+                <input type="password" class="form-control" rows="1" id="password-{{id}}" value={{password}}/>
+                <input type="checkbox" onclick="revealPassword({{id}})"> Show Password
             </div>
             </br>
             <div class="row">
               <div class="btn-group">
-                <button onclick="copyToClipBoard2()" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
+                <button onclick="copyToClipBoard2({{id}})" class="btn btn-primary btn-block">Copy Password to Clipboard</button>
               </div>
               <h5 class="clipboard-confirmation hide">Copied &#10003</h5>
             </div>
             <div class="modal-footer">
-              <button onclick="deletePassHandler()" class="btn btn-danger" id="deleteBtn" data-dismiss="modal">Delete Password</button>
+              <button onclick="deletePassHandler({{id}})" class="btn btn-danger" id="deleteBtn" data-dismiss="modal">Delete Password</button>
               <button type="button" class="btn btn-default modal-close" data-dismiss="modal">Close</button>
-              <button type="submit" id="send-btn" class="btn">Save</button>
+              <button onclick="updatePassword({{id}})" id="send-btn" class="btn">Save</button>
             </div>
           {{!-- </form> --}}
 
