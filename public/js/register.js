@@ -24,7 +24,7 @@ async function signupFormHandler(event) {
     }
 }
 
-function revealPassword() {
+function revealMasterPassword() {
     var x = document.getElementById("register-master-password");
     if (x.type === "password") {
         x.type = "text";
