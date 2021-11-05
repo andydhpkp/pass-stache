@@ -23,14 +23,12 @@ async function newPasswordHandler(event) {
     }
 }
 
-async function updatePassword(event) {
+async function updatePassword(id) {
+    const login_name = document.querySelector(`#login-name-${id}`).value;
+    const password = document.querySelector(`#password-${id}`).value;
 
-    event.preventDefault()
+    console.log(login_name);
 
-    const login_name = document.querySelector('#login_name').value.trim();
-    const password = document.querySelector('#copythingy').value.trim();
-
-    var id = document.getElementById('deletethingy').value;
     console.log('id is ' + id)
     const response = await fetch(`/api/credentials/${id}`, {
         method: 'PUT',
@@ -42,11 +40,10 @@ async function updatePassword(event) {
     })
     if (response.ok) {
         document.location.replace('/dashboard')
+        console.log('UPDATED')
     } else {
         alert(response.statusText)
     }
 }
 
 document.querySelector('.add-credential').addEventListener('submit', newPasswordHandler);
-
-// document.querySelector('.passwordUpdate').addEventListener('submit', updatePassword);
