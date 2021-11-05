@@ -23,4 +23,27 @@ async function newPasswordHandler(event) {
     }
 }
 
+async function updatePassword(id) {
+    const login_name = document.querySelector(`#login-name-${id}`).value;
+    const password = document.querySelector(`#password-${id}`).value;
+
+    console.log(login_name);
+
+    console.log('id is ' + id)
+    const response = await fetch(`/api/credentials/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            login_name,
+            password
+        }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    if (response.ok) {
+        document.location.replace('/dashboard')
+        console.log('UPDATED')
+    } else {
+        alert(response.statusText)
+    }
+}
+
 document.querySelector('.add-credential').addEventListener('submit', newPasswordHandler);

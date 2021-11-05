@@ -8,8 +8,8 @@ function copyToClipboard() {
     console.log('copied')
 }
 
-function copyToClipBoard2() {
-    var text_to_copy = document.getElementById("copythingy").innerHTML;
+function copyToClipBoard2(id) {
+    var text_to_copy = document.getElementById(`password-${id}`).value;
 
     if (!navigator.clipboard) {
         text_to_copy.select();
@@ -37,5 +37,22 @@ function copyToClipBoard2() {
                     alert("err"); // error
                 });
     }
+}
 
+function revealPassword(id) {
+    var x = document.getElementById(`password-${id}`)
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+}
+
+function revealNewPassword() {
+    var x = document.getElementById("pass-field");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
 }

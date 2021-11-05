@@ -7,7 +7,6 @@ router.get('/', (req, res) => {
     console.log('=========================')
     Credential.findAll({
         where: {
-            // change this to req.session.user_id when login is functioning
             user_id: req.session.user_id
         },
         order: [['nickname', 'ASC']]
@@ -17,7 +16,6 @@ router.get('/', (req, res) => {
 
             res.render('dashboard', {
                 credentials,
-                // include this:
                 loggedIn: req.session.loggedIn
             })
         })
