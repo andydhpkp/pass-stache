@@ -8,6 +8,7 @@
 * [License](#license)
 * [Contributors](#contributors)
 * [Questions](#questions)
+* [Credits](#credits)
 ## Description
 A full stack application with two factor authentication that allows users to easily store and save their encrypted passwords.
 ## Screenshot
@@ -61,4 +62,8 @@ Email the contributors for any questions at:
 * [Logan Boyd: Lm.boyd@icloud.com](mailto:Lm.boyd@icloud.com).
 * [Mitchell Lyon: kekoa.lyon@gmail.com](mailto:kekoa.lyon@gmail.com).
 * [Andrew Durham: andrewdurham1094@gmail.com](mailto:andrewdurham1094@gmail.com).
+
+## Credits
+
+* Portions of CSS animation code used from https://www.sliderrevolution.com/resources/css-animated-background/ by Casthra Demosthene
 
