@@ -1,6 +1,6 @@
 const router = require('express').Router()
+const {sendToken, sendEmail, verifyToken, createToken} = require('../../utils/2fa')
 const { User, Credential } = require('../../models')
-const twoFactor = require("node-2fa");
 require('dotenv').config();
 
 
@@ -51,7 +51,6 @@ router.post('/', (req, res) => {
         last_name: req.body.last_name,
         email: req.body.email,
         master_password: req.body.master_password,
-        temp_secret: twoFactor.generateSecret().secret
     })
     .then(dbUser => {
         req.session.save(() => {
@@ -119,6 +118,7 @@ router.post('/login', (req, res) => {
             email: req.body.email
         }
     }).then(dbUser => {
+
         if(!dbUser) {
             res.status(400).json({ message: 'No user with that username' })
             return
@@ -131,6 +131,9 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
+        const token = createToken()
+
+        sendEmail(req.body.email, token)
 
         req.session.save(() => {
             req.session.user_id = dbUser.id;

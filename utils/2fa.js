@@ -1,16 +1,11 @@
 "use strict";
-import nodemailer from '../../node_modules'
-import twoFactor from '../../node_modules'
-/* const nodemailer = require("nodemailer");
-const twoFactor = require("node-2fa"); */
+const nodemailer = require("nodemailer");
+const twoFactor = require("node-2fa");
 
-function sendToken() {
-    let newSecret = twoFactor.generateSecret()
-    let token = twoFactor.generateToken(newSecret).token
-
-    const email = document.querySelector('#login-email').value.trim()
-
-    sendEmail(email, token)
+function createToken() {
+  let newSecret = twoFactor.generateSecret()
+  let token = twoFactor.generateToken(newSecret.secret).token
+  return token
 }
 
 function verifyToken(secret, userToken) {
@@ -55,7 +50,7 @@ async function sendEmail(email, token) {
     
          *${token}* 
          
-         Please enter token within 4 minutes or ask for a new one.`
+        Please enter token within 4 minutes or ask for a new one.`
   };
 
   transporter.sendMail(mailOptions, function(error, info){
@@ -67,4 +62,4 @@ async function sendEmail(email, token) {
   });
 }
 
-module.exports = {sendToken, sendEmail, verifyToken}
+module.exports = {sendToken, sendEmail, verifyToken, createToken}
