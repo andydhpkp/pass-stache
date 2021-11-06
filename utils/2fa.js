@@ -62,4 +62,6 @@ async function sendEmail(email, token) {
   });
 }
 
-module.exports = {sendToken, sendEmail, verifyToken, createToken}
+
+
+module.exports = {sendEmail, verifyToken, createToken}

@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const {sendToken, sendEmail, verifyToken, createToken} = require('../../utils/2fa')
+const {sendEmail, verifyToken, createToken} = require('../../utils/2fa')
+const twoFactor = require('node-2fa')
 const { User, Credential } = require('../../models')
 require('dotenv').config();
 
@@ -131,7 +132,9 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
-        const token = createToken()
+
+        let newSecret = twoFactor.generateSecret().secret;
+        let token = twoFactor.generateToken(newSecret).token
 
         sendEmail(req.body.email, token)
 
