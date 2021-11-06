@@ -27,7 +27,7 @@ function verifyToken(secret, userToken) {
 }
 
 // async..await is not allowed in global scope, must use a wrapper
-async function sendEmail(email, token) {
+async function sendEmail(email, newToken) {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   //let testAccount = await nodemailer.createTestAccount();
@@ -48,9 +48,9 @@ async function sendEmail(email, token) {
     subject: 'Pass-Stache Authentication Code',
     text: `This is your secret token for authentication purposes:
     
-         *${token}* 
-         
-        Please enter token within 4 minutes or ask for a new one.`
+    ${newToken}
+    
+    Please enter token within 4 minutes or ask for a new one.`
   };
 
   transporter.sendMail(mailOptions, function(error, info){

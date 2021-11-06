@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {sendEmail, verifyToken, createToken} = require('../../utils/2fa')
+const { sendEmail, verifyToken, createToken } = require('../../utils/2fa')
 const twoFactor = require('node-2fa')
 const { User, Credential } = require('../../models')
 require('dotenv').config();
@@ -10,13 +10,13 @@ router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['master_password'] }
     })
-    .then(dbUser => {
-        res.json(dbUser)
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json(err)
-    })
+        .then(dbUser => {
+            res.json(dbUser)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
 
 router.get('/:id', (req, res) => {
@@ -32,85 +32,44 @@ router.get('/:id', (req, res) => {
             }
         ]
     })
-    .then(dbUser => {
-        if(!dbUser) {
-            res.status(404).json({ message: 'No user found with this id' })
-            return
-        }
-        res.json(dbUser)
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json(err)
-    })
+        .then(dbUser => {
+            if (!dbUser) {
+                res.status(404).json({ message: 'No user found with this id' })
+                return
+            }
+            res.json(dbUser)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
 
 //create new user (register)
 router.post('/', (req, res) => {
+    // create a new 2fa secret to be kept in user.secret
+    let newSecret = twoFactor.generateSecret()
+
     User.create({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
         master_password: req.body.master_password,
+        secret: newSecret.secret
     })
-    .then(dbUser => {
-        req.session.save(() => {
-            req.session.user_id = dbUser.id;
-            req.session.loggedIn = true;
+        .then(dbUser => {
+            req.session.save(() => {
+                req.session.user_id = dbUser.id;
+                req.session.loggedIn = true;
 
-            res.json(dbUser)
+                res.json(dbUser)
+            })
         })
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json(err)
-    })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
-
-/* //verify token
-router.post('/verify/:id', (req, res) => {
-    User.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(verifyUser => {
-        console.log('verifyUser.temp_secret = ' + verifyUser.temp_secret)
-        let secret = verifyUser.temp_secret
-        let token = twoFactor.generateToken(secret).token
-        console.log('token = ' + token)
-        let verified = twoFactor.verifyToken(secret, token)
-
-        client.messages
-        .create({
-            body: token,
-            to: '+18016719135', // Text this number
-            from: '+13187318839', // From a valid Twilio number
-        })
-        .then((message) => console.log(message.sid));
-
-        console.log('verified = ' + verified.delta)
-
-        switch(verified.delta) {
-            case 0:
-                res.json({ message: 'verified' })
-                break;
-            case -1:
-                res.json({ message: 'key entered too late, new key required'})
-                break;
-            case 1:
-                res.json({ message: 'key entered too early, try again'})
-                break;
-            default:
-                res.json({ message: 'something went wrong'})
-        }
-        
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({ message: 'Error finding user' })
-    })
-}) */
 
 // login route
 router.post('/login', (req, res) => {
@@ -120,7 +79,7 @@ router.post('/login', (req, res) => {
         }
     }).then(dbUser => {
 
-        if(!dbUser) {
+        if (!dbUser) {
             res.status(400).json({ message: 'No user with that username' })
             return
         }
@@ -133,19 +92,56 @@ router.post('/login', (req, res) => {
             return;
         }
 
-        let newSecret = twoFactor.generateSecret().secret;
-        let token = twoFactor.generateToken(newSecret).token
+        let newToken = twoFactor.generateToken(dbUser.secret).token
+        console.log(`newToken: ${newToken}`);
 
-        sendEmail(req.body.email, token)
+        sendEmail(req.body.email, newToken);
 
+        // save the secret, user id, and name in cookies, but do not set loggedIn to true yet
         req.session.save(() => {
+            req.session.secret = dbUser.secret;
             req.session.user_id = dbUser.id;
-            req.session.username = dbUser.username;
-            req.session.loggedIn = true;
+            req.session.name = dbUser.first_name;
 
-            res.json({ user: dbUser, message: 'You are now logged in!' })
+            console.log(`Cookies saved (secret: ${req.session.secret}, id: ${req.session.user_id}, name: ${req.session.name})`);
         })
+
+        res.json({ message: 'Successful token generation'})
     })
+})
+
+// verify user
+router.post('/verify/:token', (req, res) => {
+    // run verification check, comparing the user's secret from db and the user input token from req.params.token
+    console.log(`Session working? secret: ${req.session.secret}`)
+    console.log(`Verifying this secret: ${req.session.secret} against this token: ${req.params.token}`)
+
+    let verified = twoFactor.verifyToken(req.session.secret, req.params.token)
+
+    switch(verified.delta) {
+        case 0:
+            alert('verified')
+            break;
+        case -1:
+            alert('the token was entered too late, please try again!')
+            break;
+        case 1:
+            alert('the token was entered too early, please try again!')
+            break;
+        default:
+            alert('Something went wrong, please try again!')
+    }
+
+    // console.log(`verifying user number ${id}: ${req.session.name}`)
+
+    // after verification passes, set loggedIn to true
+    // req.session.save(() => {
+    //     req.session.user_id = req.session.user_id;
+    //     req.session.name = req.session.name
+    //     req.session.loggedIn = true;
+
+    //     res.json({ user: dbUser, message: 'You are now logged in!' })
+    // })
 })
 
 router.post('/logout', (req, res) => {
@@ -165,17 +161,17 @@ router.put('/:id', (req, res) => {
             id: req.params.id
         }
     })
-    .then(dbUser => {
-        if (!dbUser) {
-            res.status(404).json({ message: 'No user found with this id' })
-            return
-        }
-        res.json(dbUser)
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json(err)
-    })
+        .then(dbUser => {
+            if (!dbUser) {
+                res.status(404).json({ message: 'No user found with this id' })
+                return
+            }
+            res.json(dbUser)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
 
 router.delete('/:id', (req, res) => {
@@ -184,17 +180,17 @@ router.delete('/:id', (req, res) => {
             id: req.params.id
         }
     })
-    .then(dbUser => {
-        if (!dbUser) {
-            res.status(404).json({ message: 'No user found with this id' })
-            return
-        }
-        res.json(dbUser)
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json(err)
-    })
+        .then(dbUser => {
+            if (!dbUser) {
+                res.status(404).json({ message: 'No user found with this id' })
+                return
+            }
+            res.json(dbUser)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
 
 
