@@ -3,10 +3,7 @@ const { User, Credential } = require('../../models')
 const twoFactor = require("node-2fa");
 require('dotenv').config();
 
-/* const accountSid = process.env.accountSid; // Your Account SID from www.twilio.com/console
-const authToken = process.env.authToken; // Your Auth Token from www.twilio.com/console
-const twilio = require('twilio');
-const client = new twilio(accountSid, authToken); */
+
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -193,5 +190,16 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err)
     })
 })
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router

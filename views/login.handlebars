@@ -16,10 +16,11 @@
   </br>
   <div class="row text-center login_submit btn-group">
       <button type="submit" class="btn btn-primary btn-block">Login</button>
+      <button type="button" onclick="sendToken()" class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target='#task-form-modal'>Two Factor Authentication</button>
   </div>
 </form>
 <img class="pslogo" src="./img/pslogomain.gif" alt="Pass-Stache Logo">
-
+ 
 <div class="modal" id="task-form-modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -30,17 +31,18 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-xs-12" id="messageInput">
-              <label>Your Password has been texted to you, please enter the code you recieve below.</label>
+              <label>Your secure Token has been emailed to you, please enter the code you received below.</label>
               <input type="text" id="passname-field" class="form-control" placeholder="Password Name">
             </div>
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" id="send-btn" class="btn">Send</button>
+          <button type="button" onclick="verifyToken()" id="send-btn-token" class="btn">Send</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<script type="module" src="js/2fa.js"></script>
 <script src="/js/login.js"></script>
