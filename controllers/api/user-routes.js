@@ -99,38 +99,34 @@ router.post('/login', (req, res) => {
 
         // save the secret, user id, and name in cookies, but do not set loggedIn to true yet
         req.session.save(() => {
-            // req.session.secret = dbUser.secret;
+            req.session.secret = dbUser.secret;
             req.session.user_id = dbUser.id;
             req.session.name = dbUser.first_name;
-            // req.session.loggedIn = true;
 
-            console.log(`Cookies saved (secret: ${req.session.secret}, id: ${req.session.user_id}, name: ${req.session.name})`);
+            res.json(dbUser)
         })
 
-        res.json({ message: 'Successful token generation'})
     })
 })
 
 // verify user
 router.post('/verify/:token', (req, res) => {
     // run verification check, comparing the user's secret from db and the user input token from req.params.token
-    console.log(`Session working? user_id: ${req.session.user_id}`)
     console.log(`Verifying this secret: ${req.session.secret} against this token: ${req.params.token}`)
-
     let verified = twoFactor.verifyToken(req.session.secret, req.params.token)
 
-    switch(verified.delta) {
+    switch (verified.delta) {
         case 0:
-            alert('verified')
+            console.log('verified')
             break;
         case -1:
-            alert('the token was entered too late, please try again!')
+            console.log('the token was entered too late, please try again!')
             break;
         case 1:
-            alert('the token was entered too early, please try again!')
+            console.log('the token was entered too early, please try again!')
             break;
         default:
-            alert('Something went wrong, please try again!')
+            console.log('Something went wrong, please try again!')
     }
 
     // console.log(`verifying user number ${id}: ${req.session.name}`)
