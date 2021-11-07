@@ -99,9 +99,10 @@ router.post('/login', (req, res) => {
 
         // save the secret, user id, and name in cookies, but do not set loggedIn to true yet
         req.session.save(() => {
-            req.session.secret = dbUser.secret;
+            // req.session.secret = dbUser.secret;
             req.session.user_id = dbUser.id;
             req.session.name = dbUser.first_name;
+            // req.session.loggedIn = true;
 
             console.log(`Cookies saved (secret: ${req.session.secret}, id: ${req.session.user_id}, name: ${req.session.name})`);
         })
@@ -113,7 +114,7 @@ router.post('/login', (req, res) => {
 // verify user
 router.post('/verify/:token', (req, res) => {
     // run verification check, comparing the user's secret from db and the user input token from req.params.token
-    console.log(`Session working? secret: ${req.session.secret}`)
+    console.log(`Session working? user_id: ${req.session.user_id}`)
     console.log(`Verifying this secret: ${req.session.secret} against this token: ${req.params.token}`)
 
     let verified = twoFactor.verifyToken(req.session.secret, req.params.token)
@@ -192,16 +193,5 @@ router.delete('/:id', (req, res) => {
             res.status(500).json(err)
         })
 })
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router
