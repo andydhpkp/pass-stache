@@ -151,6 +151,17 @@ footer {
 .form-control {
   width: 90%;
   margin: 0 auto;
+  max-width: 500px;
+}
+
+.home-page-btns {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.info p {
+  max-width: 50%;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 450px) {
@@ -160,5 +171,10 @@ footer {
 
   .modal-close{
     display: none;
+  }
+
+  .info p {
+    max-width: 80%;
+    margin: 0 auto;
   }
 }

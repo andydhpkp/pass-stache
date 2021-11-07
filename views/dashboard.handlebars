@@ -5,9 +5,9 @@
 </br>
 </br>
 {{#if credentials.length}}
-<h4>Saved Passwords:</h4>
+<h4>Your Stash:</h4>
 {{else}}
-<h4>No Saved Passwords Yet!</h4>
+<h4>Nothing stashed yet!</h4>
 {{/if}}
 
 {{#each credentials}}
@@ -33,7 +33,7 @@
             </div>
             <div class="row">
                 <label>Password</label>
-                <input type="password" class="form-control" rows="1" id="password-{{id}}" value={{password}}/>
+                <input type="password" class="form-control" rows="1" id="password-{{id}}" value={{password}}>
                 <input type="checkbox" onclick="revealPassword({{id}})"> Show Password
             </div>
             </br>

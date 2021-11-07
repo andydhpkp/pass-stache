@@ -26,7 +26,7 @@ async function loginFormHandler(event) {
     }
 }
 
-function revealPassword() {
+function revealLoginPassword() {
     var x = document.getElementById("login-password");
     if (x.type === "password") {
         x.type = "text";
