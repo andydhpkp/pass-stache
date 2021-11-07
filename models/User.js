@@ -44,10 +44,10 @@ User.init(
             }
         },
         //added for 2fa
-        // temp_secret: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true
-        // }
+        secret: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     },
     {
         hooks: {

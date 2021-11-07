@@ -19,13 +19,18 @@ router.get('/login', (req, res) => {
     res.render('login');
 })
 
-// render login page
+// render registration page
 router.get('/register', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/dashboard');
     }
 
     res.render('register');
+})
+
+// render verify page
+router.get('/verify', (req, res) => {
+    res.render('verify')
 })
 
 module.exports = router;

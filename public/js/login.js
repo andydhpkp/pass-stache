@@ -7,8 +7,6 @@ async function loginFormHandler(event) {
     const master_password = document.querySelector('#login-password').value.trim();
 
     if (email && master_password) {
-        console.log(email);
-        console.log(master_password);
         const response = await fetch('/api/users/login', {
             method: 'post',
             body: JSON.stringify({
@@ -17,9 +15,9 @@ async function loginFormHandler(event) {
             }),
             headers: { 'Content-Type': 'application/json' }
         });
-
+        
         if (response.ok) {
-            document.location.replace('/dashboard');
+            document.location.replace('/verify');
         } else {
             alert(response.statusText);
         }
