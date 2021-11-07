@@ -118,6 +118,12 @@ router.post('/verify/:token', (req, res) => {
     switch (verified.delta) {
         case 0:
             console.log('verified')
+            // finally, set loggedIn to true
+            req.session.save(() => {
+                req.session.loggedIn = true;
+
+                res.json({message: 'User verified. Logged in.'})
+            })
             break;
         case -1:
             console.log('the token was entered too late, please try again!')
@@ -128,17 +134,6 @@ router.post('/verify/:token', (req, res) => {
         default:
             console.log('Something went wrong, please try again!')
     }
-
-    // console.log(`verifying user number ${id}: ${req.session.name}`)
-
-    // after verification passes, set loggedIn to true
-    // req.session.save(() => {
-    //     req.session.user_id = req.session.user_id;
-    //     req.session.name = req.session.name
-    //     req.session.loggedIn = true;
-
-    //     res.json({ user: dbUser, message: 'You are now logged in!' })
-    // })
 })
 
 router.post('/logout', (req, res) => {
