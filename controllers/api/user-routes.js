@@ -8,7 +8,7 @@ require('dotenv').config();
 
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: { exclude: ['master_password'] }
+        attributes: { exclude: ['master_password', 'secret'] }
     })
         .then(dbUser => {
             res.json(dbUser)
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     User.findOne({
-        attributes: { exclude: ['master_password'] },
+        attributes: { exclude: ['master_password', 'secret'] },
         where: {
             id: req.params.id
         },
