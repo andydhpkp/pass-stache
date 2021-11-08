@@ -126,13 +126,25 @@ router.post('/verify/:token', (req, res) => {
             })
             break;
         case -1:
-            console.log('the token was entered too late, please try again!')
+            // just log them in even if tokens expired, because its annoying for now
+            console.log('verified')
+            req.session.save(() => {
+                req.session.loggedIn = true;
+
+                res.json({message: 'User verified, code -1. Logged in.'})
+            })
             break;
         case 1:
-            console.log('the token was entered too early, please try again!')
+            // just log them in even if tokens expired, because its annoying for now
+            console.log('verified')
+            req.session.save(() => {
+                req.session.loggedIn = true;
+
+                res.json({message: 'User verified, code 1. Logged in.'})
+            })
             break;
         default:
-            console.log('Something went wrong, please try again!')
+            res.status(500).json({ message: 'Something went wrong, please try again!'})
     }
 })
 

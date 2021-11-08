@@ -12,8 +12,9 @@ async function verifyUser(event) {
 
     if (response.ok) {
         document.location.replace('/dashboard')
+        console.log(response.message);
     } else {
-        alert(response.statusText);
+        alert(response.message);
     }
 }
 
