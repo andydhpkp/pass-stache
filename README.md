@@ -16,7 +16,7 @@ A full stack application with two factor authentication that allows users to eas
 
 
 ## Deployment
-https://thawing-temple-09016.herokuapp.com/
+https://pass-stache-sadboitay.herokuapp.com/
 
 ## Installation
 
