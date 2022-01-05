@@ -57,7 +57,7 @@ This application is covered under the MIT license.
 ## Questions
 
 Email the contributors for any questions at: 
-* [Taylor Hakes: tg.hakes@gmail.com](mailto:tg.hakes@gmail.com).
+* [Taylor Hakes: tg.hakes@gmail.com](mailto:hello@taylorhakes.dev).
 * [John Woodland: johntaylorwoodland@gmail.com](mailto:johntaylorwoodland@gmail.com).
 * [Logan Boyd: Lm.boyd@icloud.com](mailto:Lm.boyd@icloud.com).
 * [Mitchell Lyon: kekoa.lyon@gmail.com](mailto:kekoa.lyon@gmail.com).
